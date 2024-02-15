@@ -3,14 +3,12 @@ import NavBar from "../../Components/NavBar.vue";
 </script>
 
 <template>
-  <main>
-    <header>
-      <NavBar/>
-    </header>
-    <article>
-      <div class="container">
-        <slot/>
-      </div>
-    </article>
+  <header>
+    <NavBar/>
+  </header>
+  <main class="mt-5">
+    <div class="container">
+      <slot/>
+    </div>
   </main>
 </template>

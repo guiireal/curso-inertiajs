@@ -18,6 +18,9 @@ import { Link } from "@inertiajs/vue3";
           <li class="nav-item">
             <Link class="nav-link" href="/users">Usuários</Link>
           </li>
+          <li class="nav-item">
+            <Link class="nav-link" href="/users/create">Novo usuário</Link>
+          </li>
         </ul>
       </div>
     </div>

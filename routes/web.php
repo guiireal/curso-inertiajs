@@ -6,5 +6,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+
+Route::prefix('users')->name('users.')->controller(UserController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::post('/', 'store')->name('store');
+    Route::delete('{user}', 'destroy')->name('destroy');
+});
+
+

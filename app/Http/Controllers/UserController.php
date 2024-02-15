@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -13,10 +14,24 @@ class UserController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return inertia('Users/Create');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    }
+
     public function destroy(User $user)
     {
         $user->delete();
 
-        return redirect()->route('users.index');
+        return to_route('users.index')->with('success', 'Usuário excluído!');
     }
 }
