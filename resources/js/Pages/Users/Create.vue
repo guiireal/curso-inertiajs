@@ -8,7 +8,15 @@ const form = useForm({
 });
 
 function submit() {
-  form.post("/users");
+  form.post("/users", {
+    onFinish() {
+      form.reset();
+      setTimeout(() => {
+        form.clearErrors();
+      }, 4000);
+    },
+    preserveScroll: true,
+  });
 }
 </script>
 
