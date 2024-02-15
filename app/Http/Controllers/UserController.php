@@ -11,7 +11,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $hasSearch = $request->has('search');
-        
+
         return inertia('Users/Index', [
             'users' => User::query()
                 ->when(

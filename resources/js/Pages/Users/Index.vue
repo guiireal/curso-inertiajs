@@ -36,7 +36,7 @@ const message = computed(() => page.props.flash.success);
   <ul class="list-group">
     <li class="list-group-item d-flex justify-content-between" v-for="user in users.data" :key="user.id">
       {{ user.name }}
-      <Link :href="`/users/${user.id}`" :data="{ teste: 'ok' }" method="delete" as="button" class="btn btn-danger">
+      <Link :href="`/users/${user.id}`" method="delete" as="button" class="btn btn-danger">
         Deletar
       </Link>
     </li>
