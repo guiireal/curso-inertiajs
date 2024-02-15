@@ -1,9 +1,9 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
-import Layout from "@/Pages/_Layouts/App.vue";
-import AppHeader from "@/Components/AppHeader.vue";
+import Layout from "./Pages/_Layouts/App.vue";
+import AppHeader from "./Components/AppHeader.vue";
 
-createInertiaApp({
+await createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
 
@@ -20,4 +20,10 @@ createInertiaApp({
       .mount(el);
   },
   title: title => `${title} - App`,
+  progress: {
+    delay: 250,
+    color: "green",
+    includeCSS: true,
+    showSpinner: true,
+  },
 });
