@@ -1,6 +1,7 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
-import Layout from "./Pages/_Layouts/App.vue";
+import Layout from "@/Pages/_Layouts/App.vue";
+import AppHeader from "@/Components/AppHeader.vue";
 
 createInertiaApp({
   resolve: name => {
@@ -15,6 +16,8 @@ createInertiaApp({
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
+      .component("AppHeader", AppHeader)
       .mount(el);
   },
+  title: title => `${title} - App`,
 });

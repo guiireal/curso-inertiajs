@@ -1,11 +1,11 @@
 <script setup>
-import {Head} from '@inertiajs/vue3';
+defineProps({
+    users: Array,
+});
 </script>
 
 <template>
-    <Head>
-        <title>Usuários</title>
-    </Head>
+    <AppHeader title="Usuários"/>
     <h1>Usuários</h1>
     <ul>
         <li v-for="user in users" :key="user.id">
