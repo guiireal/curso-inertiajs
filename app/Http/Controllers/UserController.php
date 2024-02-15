@@ -3,14 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return inertia('Users/Index', [
-            'users' => User::paginate(10),
+            'users' => User::query()
+                ->when(
+                    value: $request->has('search'),
+                    callback: fn(Builder $query) => $query->where(
+                        column: 'name',
+                        operator: 'LIKE',
+                        value: "%{$request->search}%"
+                    )
+                )
+                ->paginate(10),
         ]);
     }
 

@@ -1,12 +1,21 @@
 <script setup>
-import { Link, usePage } from "@inertiajs/vue3";
-import { computed } from "vue";
+import { Link, router, usePage } from "@inertiajs/vue3";
+import { computed, ref, watch } from "vue";
+import Paginator from "../../Components/Paginator.vue";
+import { debounce } from "lodash";
 
 defineProps({
   users: Object,
 });
 
+const search = ref("");
 const page = usePage();
+
+watch(search, debounce((value) => {
+  router.get("/users", { search: value }, {
+    preserveState: true
+  });
+}, 500));
 
 const message = computed(() => page.props.flash.success);
 
@@ -15,6 +24,9 @@ const message = computed(() => page.props.flash.success);
 <template>
   <AppHeader title="Usuários"/>
   <h1>Usuários</h1>
+  <div class="my-4">
+    <input type="text" placeholder="Pesquisar..." class="form-control" v-model="search"/>
+  </div>
   <div v-if="message" class="alert alert-success">
     {{ message }}
   </div>
@@ -28,9 +40,5 @@ const message = computed(() => page.props.flash.success);
     </li>
   </ul>
   <hr>
-  <ul class="pagination">
-    <li class="page-item" v-for="link in users.links">
-      <Link class="page-link" :href="link.url" v-html="link.label" :class="{ active: link.active }" preserve-scroll/>
-    </li>
-  </ul>
+  <Paginator :data="users"/>
 </template>
