@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { Link, useForm } from "@inertiajs/vue3";
 
 const form = useForm({
   name: "",
@@ -51,5 +51,6 @@ function submit() {
         </form>
       </div>
     </div>
+    <Link href="/users/create" class="btn btn-secondary" preserver-scroll>Voltar</Link>
   </div>
 </template>
