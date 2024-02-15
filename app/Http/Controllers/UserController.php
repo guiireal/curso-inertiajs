@@ -10,17 +10,20 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
+        $hasSearch = $request->has('search');
+        
         return inertia('Users/Index', [
             'users' => User::query()
                 ->when(
-                    value: $request->has('search'),
+                    value: $hasSearch,
                     callback: fn(Builder $query) => $query->where(
                         column: 'name',
                         operator: 'LIKE',
-                        value: "%{$request->search}%"
+                        value: "%{$request->query('search')}%"
                     )
                 )
                 ->paginate(10),
+            'search' => $hasSearch ? $request->search : '',
         ]);
     }
 

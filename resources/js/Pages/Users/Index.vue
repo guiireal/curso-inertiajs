@@ -4,16 +4,18 @@ import { computed, ref, watch } from "vue";
 import Paginator from "../../Components/Paginator.vue";
 import { debounce } from "lodash";
 
-defineProps({
+const props = defineProps({
   users: Object,
+  search: String
 });
 
-const search = ref("");
+const search = ref(props.search);
 const page = usePage();
 
 watch(search, debounce((value) => {
   router.get("/users", { search: value }, {
-    preserveState: true
+    preserveState: true,
+    replace: true
   });
 }, 500));
 
