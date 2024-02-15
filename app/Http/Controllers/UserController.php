@@ -10,7 +10,7 @@ class UserController extends Controller
     public function index()
     {
         return inertia('Users/Index', [
-            'users' => User::all(),
+            'users' => User::paginate(10),
         ]);
     }
 
@@ -26,6 +26,10 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        User::create($validatedData);
+
+        return to_route('users.index')->with('success', 'Usuário criado!');
     }
 
     public function destroy(User $user)

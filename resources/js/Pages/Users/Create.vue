@@ -8,6 +8,11 @@ const form = useForm({
 });
 
 function submit() {
+  if (!form.isDirty) {
+    alert("Nenhuma mudança foi feita");
+    return;
+  }
+
   form.post("/users", {
     onFinish() {
       form.reset();
@@ -25,6 +30,7 @@ function submit() {
   <div class="card">
     <div class="card-header">
       <div class="card-title"><h1>Novo usuário</h1></div>
+      <div v-if="form.isDirty">Você tem mudanças não salvas</div>
       <div class="card-body">
         <form @submit.prevent="submit">
           <div class="mb-3">
